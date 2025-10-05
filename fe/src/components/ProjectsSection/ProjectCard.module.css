@@ -1,0 +1,216 @@
+.card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 200px;
+  flex-grow: 1;
+}
+
+.card {
+  position: relative;
+  min-width: 400px;
+  height: 500px;
+  padding: 40px;
+  border-radius: 24px;
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 1px rgba(255, 255, 255, 0.5),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.05);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.3s ease, background 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  overflow: hidden;
+}
+
+/* 블러된 배경 이미지 레이어 */
+.card-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-position: right top;
+  background-size: 120%;
+  background-repeat: no-repeat;
+  opacity: 0.8;
+  z-index: 0;
+  transition: filter 0.3s ease, opacity 0.3s ease;
+}
+
+.card:hover .card-background {
+  filter: blur(5px);
+  opacity: 0.9;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.card:hover {
+  transform: translateY(-20px) scale(1.02);
+  background-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(255, 255, 255, 0.4), inset 0 2px 2px rgba(255, 255, 255, 0.6),
+    inset 0 -2px 2px rgba(0, 0, 0, 0.05);
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.card-content {
+  flex: 1;
+  position: relative;
+  z-index: 2;
+}
+
+.title {
+  margin: 0 0 20px 0;
+  font-size: 32px;
+  font-weight: bold;
+  transition: transform 0.3s ease, text-shadow 0.3s ease;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15), 0 0 20px rgba(255, 255, 255, 0.3);
+  position: relative;
+  color: white;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+.title::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.6);
+  transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border-radius: 2px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.card:hover .title {
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.2), 0 0 30px rgba(255, 255, 255, 0.5);
+}
+
+.card:hover .title::after {
+  width: 80px;
+}
+
+.card-hello {
+  background-position: left bottom;
+}
+.card-picscore {
+  background-position: left;
+}
+.card-undaied {
+  background-position: 30% 20%;
+  width: 150%;
+  background-size: 130%;
+  transform: rotate(-60deg);
+}
+
+.description {
+  margin: 10px 0;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.role {
+  margin: 10px 0;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+  position: relative;
+  z-index: 2;
+}
+
+.card:hover .button-container {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+}
+
+.btn-github,
+.btn-detail {
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border: none;
+  outline: none;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.btn-github {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.btn-github:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.btn-detail {
+  background: rgba(255, 255, 255, 0.25);
+  color: white;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  font-weight: 700;
+}
+
+.btn-detail:hover {
+  background: rgba(255, 255, 255, 0.35);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.btn-github:active,
+.btn-detail:active {
+  transform: translateY(0);
+}
