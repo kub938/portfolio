@@ -1,10 +1,29 @@
 :root {
-  --background: #ffffff;
+  --background: #000000;
   --foreground: #171717;
+  --white: rgba(0, 0, 0, 0);
+  --text-section-header: clamp(32px, 5vw, 100px);
+  --card-color-green: #9fe055;
+  --card-color-gray: rgba(0, 0, 0, 0.751);
+  --card-color-red: #db1313;
+  --card-color-purple: hsl(266, 100%, 63%);
 }
 
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+}
+
+body {
+  background-color: var(--background);
+}
+
+.sectionY {
+  min-height: 100svh;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
 }
