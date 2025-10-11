@@ -6,9 +6,8 @@
   border-radius: 40px;
   gap: 10px;
   padding: 30px;
-  border: 1px solid white;
-  backdrop-filter: blur(10px);
   z-index: 10;
+  pointer-events: none;
 }
 
 .hero-title {
