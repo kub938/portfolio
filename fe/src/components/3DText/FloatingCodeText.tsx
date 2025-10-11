@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useMemo } from "react";
+import { useRef, useMemo, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Text3D, OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
@@ -19,22 +19,28 @@ function FloatingText({
   range = 0.5,
 }: FloatingTextProps) {
   const meshRef = useRef<THREE.Mesh>(null);
+  const [hovered, setHovered] = useState(false);
+  const [clicked, setClicked] = useState(false);
 
-  // 각 텍스트마다 고유한 offset을 생성하여 다양한 움직임 만들기
   const offset = useMemo(() => Math.random() * Math.PI * 2, []);
 
+  //떠 다니는 효과
   useFrame(({ clock }) => {
     if (meshRef.current) {
       const t = clock.getElapsedTime() * speed + offset;
 
-      // 부드러운 떠다니는 효과
       meshRef.current.position.y = position[1] + Math.sin(t) * range;
       meshRef.current.position.x =
         position[0] + Math.cos(t * 0.5) * range * 0.5;
 
-      // 회전 효과 (입체감을 더 잘 보이게)
       meshRef.current.rotation.y = Math.sin(t * 0.3) * 0.5;
       meshRef.current.rotation.x = Math.cos(t * 0.2) * 0.3;
+
+      const targetScale = hovered ? 1.2 : clicked ? 0.8 : 1;
+      meshRef.current.scale.lerp(
+        new THREE.Vector3(targetScale, targetScale, targetScale),
+        0.1
+      );
     }
   });
 
@@ -50,15 +56,33 @@ function FloatingText({
       bevelThickness={0.02}
       bevelSize={0.02}
       bevelSegments={5}
+      onPointerOver={(e) => {
+        e.stopPropagation();
+        setHovered(true);
+        document.body.style.cursor = "pointer";
+      }}
+      onPointerOut={() => {
+        setHovered(false);
+        document.body.style.cursor = "auto";
+      }}
+      onClick={(e) => {
+        e.stopPropagation();
+        setClicked(!clicked);
+      }}
     >
       {text}
-      <meshStandardMaterial color="#00ff88" metalness={0.5} roughness={0.2} />
+      <meshStandardMaterial
+        color={clicked ? "#ff0000" : "#00ff88"}
+        metalness={0.5}
+        roughness={hovered ? 0.1 : 0.2}
+        emissive="#ffffffff"
+        emissiveIntensity={hovered ? 1 : 0.5}
+      />
     </Text3D>
   );
 }
 
 export default function FloatingCodeText() {
-  // 코드 문자들 배열
   const codeChars = [
     "{",
     "}",
@@ -78,13 +102,13 @@ export default function FloatingCodeText() {
     "!",
   ];
 
-  // 랜덤 위치 생성
+  //위치
   const floatingTexts = useMemo(() => {
     return codeChars.map((char, i) => ({
       text: char,
       position: [
         (Math.random() - 0.5) * 15,
-        (Math.random() - 0.5) * 6,
+        (Math.random() - 0.5) * 10,
         (Math.random() - 0.5) * 10,
       ] as [number, number, number],
       speed: 0.3 + Math.random() * 0.7,
@@ -120,11 +144,7 @@ export default function FloatingCodeText() {
           />
         ))}
 
-        <OrbitControls
-          enableZoom={false}
-          enablePan={false}
-          enableRotate={true}
-        />
+        <OrbitControls enabled={false} />
       </Canvas>
     </div>
   );
