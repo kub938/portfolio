@@ -1,0 +1,74 @@
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 40px;
+  gap: 10px;
+  padding: 30px;
+  border: 1px solid white;
+  backdrop-filter: blur(10px);
+  z-index: 10;
+}
+
+.hero-title {
+  font-size: 5rem;
+  font-weight: 700;
+}
+
+.hero-role {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.hero-name {
+  font-size: 3rem;
+  font-weight: 700;
+  border-bottom: 1px solid var(--font-white);
+}
+
+.hero-description {
+  padding: 20;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.effect {
+  color: rgb(8, 215, 60);
+}
+
+/* .barY {
+  margin-top: 100px;
+  height: 100px;
+  width: 2px;
+
+  border-radius: 30px;
+
+  background-size: 100% 200px;
+
+  background-image: linear-gradient(
+    to bottom,
+    #000000 0%,
+    #56d174 25%,
+    #000000 50%,
+    #56d174 75%,
+    #000000 100%
+  );
+  animation: bar-anim 3s infinite linear;
+}
+
+@keyframes bar-anim {
+  from {
+    background-position: 0% 0%;
+  }
+  to {
+    background-position: 0% 100%;
+  }
+} */
+
+.hero-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
