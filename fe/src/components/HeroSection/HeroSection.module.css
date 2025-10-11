@@ -3,3 +3,13 @@
   position: relative;
   gap: 10;
 }
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  inset: 0; /* top, right, bottom, left 모두 0 */
+  backdrop-filter: blur(10px);
+  mask-image: radial-gradient(circle, black, transparent);
+  pointer-events: none;
+  z-index: 4; /* 글씨 뒤로 */
+}
