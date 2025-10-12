@@ -23,7 +23,7 @@
 .hero-name {
   font-size: 3rem;
   font-weight: 700;
-  border-bottom: 1px solid var(--font-white);
+  border-bottom: 1px solid var(--font-color);
 }
 
 .hero-description {

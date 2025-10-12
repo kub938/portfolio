@@ -5,7 +5,7 @@ import HeroContent from "./HeroContent";
 function HeroSection() {
   return (
     <>
-      <section className={`sectionY ${styles["hero-section"]}`}>
+      <section id="hero" className={`sectionY ${styles["hero-section"]}`}>
         <FloatingCodeText />
         <HeroContent />
       </section>

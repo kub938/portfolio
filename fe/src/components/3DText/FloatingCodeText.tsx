@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useMemo, useState } from "react";
+import { useRef, useMemo, useState, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Text3D, OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
@@ -21,8 +21,16 @@ function FloatingText({
   const meshRef = useRef<THREE.Mesh>(null);
   const [hovered, setHovered] = useState(false);
   const [clicked, setClicked] = useState(false);
+  const [textColor, setTextColor] = useState("#667eea");
 
   const offset = useMemo(() => Math.random() * Math.PI * 2, []);
+
+  useEffect(() => {
+    const rootStyles = getComputedStyle(document.documentElement);
+    const floatingColor = rootStyles.getPropertyValue("--floating-code-color");
+
+    setTextColor(floatingColor);
+  }, []);
 
   //떠 다니는 효과
   useFrame(({ clock }) => {
@@ -72,10 +80,8 @@ function FloatingText({
     >
       {text}
       <meshStandardMaterial
-        color={clicked ? "#ff0000" : "#00ff88"}
-        metalness={0.5}
+        color={clicked ? "#ff0000" : textColor}
         roughness={hovered ? 0.1 : 0.2}
-        emissive="#ffffffff"
         emissiveIntensity={hovered ? 1 : 0.5}
       />
     </Text3D>
@@ -121,7 +127,6 @@ export default function FloatingCodeText() {
       style={{
         width: "100%",
         height: "100vh",
-        background: "#0a0a0a",
         position: "absolute",
       }}
     >
