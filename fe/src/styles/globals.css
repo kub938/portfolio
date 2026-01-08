@@ -3,17 +3,20 @@
   --background: #f0f0f0;
   --font-color: #111111;
   --floating-code-color: #00ff5e;
-  --navbar-background-color: black;
+  --navbar-background-color: #f0f0f0;
+  --navbar-background-hover-color: #e3e3e3;
   --text-section-header: clamp(32px, 5vw, 100px);
   --card-color-green: #9fe055;
   --card-color-gray: rgba(0, 0, 0, 0.751);
   --card-color-red: #db1313;
-  --card-color-purple: hsl(266, 100%, 63%);
+  --card-color-purple: rgb(148, 66, 255);
 }
 
 [data-theme="dark"] {
   --background: #111111;
   --font-color: #f0f0f0;
+  --navbar-background-color: #252525;
+  --navbar-background-hover-color: #323232;
 }
 
 * {
@@ -45,5 +48,7 @@ body {
   :root {
     --background: #111111;
     --font-color: #f0f0f0;
+    --navbar-background-color: #252525;
+    --navbar-background-hover-color: #323232;
   }
 }
